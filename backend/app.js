@@ -1,6 +1,6 @@
-const express = require('express')
-const PORT = 3000
-const app = express()
+const express = require('express');
+const PORT = 3000;
+const app = express();
 
 app.listen(PORT, () => {
     console.log('Сервер запущен на порту', PORT);
