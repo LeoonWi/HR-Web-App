@@ -1,6 +1,8 @@
-var getWorker = require('./Models/WorkerModel');
+var db = require('./connectMariaDB');
+
+// Отображение всех сотрудников
 const showWorker = (req, res) => {
-    getWorker((err, workers) => {
+    db.query({dateStrings: true, sql: "SELECT * FROM db_hr.Worker"}, (err, workers) => { // dateString для читабельного отображения даты
         if(err) {
             console.log(err);
         } else {
