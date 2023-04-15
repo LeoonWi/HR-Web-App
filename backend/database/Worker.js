@@ -1,7 +1,7 @@
-var db = require('./connectMariaDB');
+import { db } from './connectMariaDB.js';
 
 // Отображение всех сотрудников
-const showWorker = (req, res) => {
+export const showWorker = (req, res) => {
     db.query({dateStrings: true, sql: "SELECT * FROM db_hr.Worker"}, (err, workers) => { // dateString для читабельного отображения даты
         if(err) {
             console.log(err);
@@ -10,5 +10,3 @@ const showWorker = (req, res) => {
         };
     });
 };
-
-module.exports = showWorker;

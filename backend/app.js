@@ -1,9 +1,13 @@
-const express = require('express');
+import express from 'express';
+import cors from 'cors';
+import Router from './routes/router.js';
+
 const PORT = 3000;
 const app = express();
 
-var showWorker = require('./database/Worker');
-app.get('/', showWorker);
+app.use(express.json());
+app.use(cors());
+app.use(Router);
 
 app.listen(PORT, () => {
     console.log('Сервер запущен на порту', PORT);
