@@ -1,21 +1,21 @@
 <template>
+    <!-- data-uk-datepicker="{format:'DD.MM.YYYY'}" -->
     <table>
         <tr>
-            <th>id</th>
-            <th>Ф.И.О.</th>
+            <th>ФИО</th>
             <th>Дата рождения</th>
             <th>Пол</th>
             <th>Адрес</th>
             <th>Телефон</th>
+            <th>Статус</th>
         </tr>
-        <tr v-for="(worker, id) in data" :key="id">
-            <td>{{ id }}</td>
-            <td>{{ worker.fio }}</td>
-            <td>{{ worker.birthdate }}</td>
-            <td>{{ worker.gender }}</td>
-            <td>{{ worker.address }}</td>
-            <td>{{ worker.phone }}</td>
-            <router-link :to="{ name: 'updateWorker', params: {id: id} }">Обновить</router-link>
+        <tr>
+            <td>{{ this.data.fio }}</td>
+            <td>{{ this.data.birthdate }}</td>
+            <td>{{ this.data.gender }}</td>
+            <td>{{ this.data.address }}</td>
+            <td>{{ this.data.phone }}</td>
+            <td>{{ this.data.status }}</td>
         </tr>
     </table>
 </template>
@@ -24,10 +24,11 @@
 import axios from 'axios';
 
 export default {
-    name: 'Worker',
+    name: 'updateWorker',
     data() {
         return {
             data: [],
+            selectId: this.$route.params.id,
         };
     },
     mounted() {
@@ -36,9 +37,13 @@ export default {
     methods: {
         async WorkerList() {
             await axios.get('http://127.0.0.1:3000/showWorker')
-            .then((response) => { this.data = response.data })
+            .then((response) => { this.data = response.data[this.selectId] })
             .catch((error) => { console.log(error) });
         }
     }
 }
 </script>
+
+<style>
+
+</style>
