@@ -1,0 +1,3 @@
+<template>
+    Component 'Home'
+</template>
