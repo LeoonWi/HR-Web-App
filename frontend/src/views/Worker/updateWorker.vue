@@ -1,7 +1,7 @@
 <template>
     <div id="fio" class="form">
         <label class="form-label">Фамилия / Имя / Отчество</label>
-        <input type="text" id="fio" class="form-control" v-model="data.fio">
+        <input type="text" id="fio" class="form-control" maxlength="70" v-model="data.fio" placeholder="Фамилия Имя Отчество">
     </div>
     <div id="birthdate" class="form">
         <label class="form-label">Дата рождения</label>
@@ -12,17 +12,17 @@
         <label class="form-label">Пол</label>
         <select class="form-select" aria-label="Default select example" v-model="data.gender">
             <option selected>{{ this.data.gender }}</option>
-            <option value="мужской" v-if="this.data.gender === 'женский'">мужской</option>
-            <option value="женский" v-if="this.data.gender === 'мужской'">женский</option>
+            <option value="мужской" v-if="this.data.gender != 'мужской'">мужской</option>
+            <option value="женский" v-if="this.data.gender != 'женский'">женский</option>
         </select>
     </div>
     <div id="address" class="form">
         <label class="form-label">Адрес проживания</label>
-        <input type="text" id="address" class="form-control" v-model="data.address">
+        <input type="text" id="address" class="form-control" maxlength="100" v-model="data.address">
     </div>
     <div id="phone" class="form">
         <label class="form-label">Номер телефона</label>
-        <input type="text" id="phone" class="form-control" v-model="data.phone">
+        <input type="text" id="phone" class="form-control" maxlength="12" v-model="data.phone">
     </div>
     <template v-if="data.status === 'Не работает'">
         <div id="status" class="form">
@@ -31,7 +31,7 @@
         </div>
         <div id="reason" class="form">
             <label class="form-label">Причина увольнения</label>
-            <input type="text" id="phone" readonly class="form-control" v-model="data.reason">
+            <input type="text" id="phone" readonly class="form-control" maxlength="100" v-model="data.reason">
         </div>
     </template>
     <button @click="updateWorker" type="button" class="btn btn-success" id="saveWorker">Сохранить</button>
@@ -49,7 +49,7 @@
             <form>
                 <div class="mb-3">
                     <label for="message-text" class="col-form-label">Причина:</label>
-                    <textarea class="form-control" id="reason" v-model="reason"></textarea>
+                    <textarea class="form-control" id="reason" maxlength="12" v-model="reason"></textarea>
                 </div>
                 <div class="mb-3">
                     <div class="form-check">

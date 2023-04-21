@@ -1,5 +1,7 @@
 <template>
-    <button type="button" class="btn btn-outline-success">Добавить</button>
+    <RouterLink to="/create/worker" class="btn btn-outline-success" role="button">
+        Добавить
+    </RouterLink>
     <table class="table">
         <thead>
             <tr>
@@ -17,7 +19,8 @@
                 <td>{{ worker.gender }}</td>
                 <td>{{ worker.address }}</td>
                 <td>{{ worker.phone }}</td>
-                <router-link :to="{ name: 'updateWorker', params: {id: id} }" class="btn btn-outline-primary" drole="button">Обновить</router-link>
+                <router-link :to="{ name: 'updateWorker', params: {id: id} }"
+                class="btn btn-outline-primary" role="button">Обновить</router-link>
             </tr>
         </tbody>
     </table>

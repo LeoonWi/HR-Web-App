@@ -1,5 +1,5 @@
 import express from 'express';
-import { showWorker, updateWorker } from '../database/Worker.js';
+import { createWorker, showWorker, updateWorker } from '../database/Worker.js';
 import { showContract } from '../database/Contract.js';
 import { showSick } from '../database/Sick.js';
 import { showVacation } from '../database/Vacation.js';
@@ -11,6 +11,7 @@ const router = express.Router();
 
 router.get("/showWorker", showWorker); // Показать всех сотрудников
 router.post("/updateWorker", updateWorker); // Обновить данные о сотруднике
+router.post("/createWorker", createWorker); // Добавить нового сотрудника
 router.get("/showContract", showContract); // Показать все контракты
 router.get("/showSick", showSick); // Показать весь учет о больничных
 router.get("/showVacation", showVacation); // Показать весь учет об отпусках
