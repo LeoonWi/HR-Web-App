@@ -36,8 +36,8 @@
     </template>
     <button @click="updateWorker" type="button" class="btn btn-success" id="saveWorker">Сохранить</button>
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" id="dismissWorker" v-if="data.status === 'Работает'">Уволить</button>
-    
-    
+
+
     <!-- Всплывающее окно -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -61,7 +61,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Назад</button>
-            <button @click="dismissWorker" type="button" :class="{btn: true, 'btn-danger': true, disabled: !this.proofDismiss}" data-bs-dismiss="modal">Уволить</button>
+            <button @click="dismissWorker" type="button" :class="{ btn: true, 'btn-danger': true, disabled: !this.proofDismiss }" data-bs-dismiss="modal">Уволить</button>
           </div>
         </div>
       </div>
@@ -91,7 +91,7 @@ export default {
             this.fio = this.data.fio;
         },
         async updateWorker() {
-            const responce = await Api().post('updateWorker', {
+            const response = await Api().post('updateWorker', {
                 fio: this.data.fio,
                 birthdate: this.data.birthdate,
                 gender: this.data.gender,
@@ -99,16 +99,28 @@ export default {
                 phone: this.data.phone,
                 fioKey: this.fio
             });
-            console.log(responce.data.message);
+            console.log(response.data.message);
             window.location.reload();
         },
         async dismissWorker() {
-            const responce = await Api().post('updateWorker', {
+            const response = await Api().post('updateWorker', {
                 status: 'Не работает',
                 reason: this.reason,
                 fioKey: this.fio
             });
-            console.log(responce.data.message);
+            console.log(response.data.message);
+            
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today = yyyy + '-' + mm + '-' + dd;
+
+            const responseTwo = await Api().post('updateContract', {
+                fio: this.fio,
+                date: today
+            });
+            console.log(response.data.message + '\n' + responseTwo.data.message);
             window.location.reload();
         }
     }
@@ -116,10 +128,6 @@ export default {
 </script>
 
 <style scoped>
-    div.form {
-        margin: 10px auto;
-    }
-
     button#dismissWorker {
         float: right;
     }

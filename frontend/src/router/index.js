@@ -1,9 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Contract from "@/views/Contract.vue";
+import Home from "@/views/Home.vue";
+import Contract from "@/views/Contract/Contract.vue";
 import Worker from "@/views/Worker/Worker.vue";
 import updateWorker from "@/views/Worker/updateWorker.vue";
 import createWorker from "@/views/Worker/createWorker.vue";
-import Home from "@/views/Home.vue";
+import Dept from "@/views/Dept/Dept.vue";
+import updateDept from "@/views/Dept/updateDept.vue";
 
 const routes = [
   {
@@ -30,6 +32,16 @@ const routes = [
     path: "/create/worker",
     name: "createWorker",
     component: createWorker
+  },
+  {
+    path: "/dept",
+    name: "Dept",
+    component: Dept
+  },
+  {
+    path: "/edit/dept/:id",
+    name: "updateDept",
+    component: updateDept
   }
 ];
 

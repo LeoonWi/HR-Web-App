@@ -48,14 +48,25 @@ export default {
     },
     methods: {
         async saveWorker() {
-            const response = await Api().post('createWorker', {
+            const responseOne = await Api().post('createWorker', {
                 fio: this.data.fio,
                 birthdate: this.data.birthdate,
                 gender: this.data.gender,
                 address: this.data.address,
                 phone: this.data.phone
             });
-            console.log(response.data.message);
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today = yyyy + '-' + mm + '-' + dd;
+
+            const responseTwo = await Api().post('createContract', {
+                fio: this.data.fio,
+                date: today
+            })
+            console.log(responseOne.data.message + '\n' + responseTwo.data.message);
             window.location.href = 'http://localhost:8080/worker'
         }
     }

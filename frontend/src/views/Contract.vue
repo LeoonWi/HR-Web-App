@@ -1,3 +1,0 @@
-<template>
-    Component 'Contract'
-</template>
