@@ -6,6 +6,9 @@ import updateWorker from "@/views/Worker/updateWorker.vue";
 import createWorker from "@/views/Worker/createWorker.vue";
 import Dept from "@/views/Dept/Dept.vue";
 import updateDept from "@/views/Dept/updateDept.vue";
+import createDept from "@/views/Dept/createDept.vue";
+import Sick from "@/views/Sick.vue";
+import Vacation from "@/views/Vacation.vue";
 
 const routes = [
   {
@@ -42,6 +45,21 @@ const routes = [
     path: "/edit/dept/:id",
     name: "updateDept",
     component: updateDept
+  },
+  {
+    path: "/create/dept",
+    name: "createDept",
+    component: createDept
+  },
+  {
+    path: "/sick",
+    name: "Sick",
+    component: Sick
+  },
+  {
+    path: "/vacation",
+    name: "Vacation",
+    component: Vacation
   }
 ];
 

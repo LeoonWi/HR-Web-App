@@ -21,7 +21,7 @@
             <tr v-for="(worker, id) in data" :key="id">
                 <template v-if="flag && worker.status == 'Работает'">
                     <td>{{ worker.fio }}</td>
-                    <td>{{ worker.birthdate }}</td>
+                    <td class="date">{{ worker.birthdate }}</td>
                     <td>{{ worker.gender }}</td>
                     <td>{{ worker.address }}</td>
                     <td>{{ worker.phone }}</td>
@@ -31,7 +31,7 @@
                 </template>
                 <template v-if="!flag && worker.status == 'Не работает'">
                     <td>{{ worker.fio }}</td>
-                    <td>{{ worker.birthdate }}</td>
+                    <td class=date>{{ worker.birthdate }}</td>
                     <td>{{ worker.gender }}</td>
                     <td>{{ worker.address }}</td>
                     <td>{{ worker.phone }}</td>

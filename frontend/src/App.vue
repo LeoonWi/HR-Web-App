@@ -5,8 +5,10 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">    <!-- Добавить класс active если сссылка активна или disable если недоступна-->
           <RouterLink to="/worker" class="nav-link">Сотрудники</RouterLink>
-          <RouterLink to="/contract" class="nav-link">Контракты</RouterLink>
           <RouterLink to="/dept" class="nav-link">Отделы</RouterLink>
+          <RouterLink to="/contract" class="nav-link">Контракты</RouterLink>
+          <RouterLink to="/sick" class="nav-link">Больничные</RouterLink>
+          <RouterLink to="/vacation" class="nav-link">Отпускные</RouterLink>
         </div>
       </div>
     </div>
@@ -31,9 +33,15 @@ export default {
 </script>
 
 <style>
+  nav.navbar {
+    position: fixed;
+    width: 100%;
+  }
+
   div#body-router {
     width: 1280px;
-    margin: 10px auto;
+    margin: auto;
+    padding-top: 65px;
   }
 
   div.form {
@@ -46,5 +54,9 @@ export default {
 
   div.flag {
     float: right;
+  }
+
+  thead, tr th, td.date {
+    text-align: center;
   }
 </style>

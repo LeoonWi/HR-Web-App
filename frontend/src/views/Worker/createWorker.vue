@@ -32,6 +32,7 @@
 
 <script>
 import Api from '../../../../backend/api.js';
+import router from '@/router';
 
 export default {
     name: 'createWorker',
@@ -67,7 +68,7 @@ export default {
                 date: today
             })
             console.log(responseOne.data.message + '\n' + responseTwo.data.message);
-            window.location.href = 'http://localhost:8080/worker'
+            router.push({ name: 'Worker'});
         }
     }
 }

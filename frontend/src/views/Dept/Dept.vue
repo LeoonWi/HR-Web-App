@@ -1,4 +1,7 @@
 <template>
+    <RouterLink to="/create/dept" class="btn btn-outline-success" role="button">
+        Добавить
+    </RouterLink>
     <table class="table">
         <thead>
             <th>Наименование</th>

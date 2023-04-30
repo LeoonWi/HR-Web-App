@@ -1,4 +1,7 @@
 <template>
+    <RouterLink to="/worker" class="btn btn-outline-primary" role="button">
+        Назад
+    </RouterLink>
     <div id="fio" class="form">
         <label class="form-label">Фамилия / Имя / Отчество</label>
         <input type="text" id="fio" class="form-control" maxlength="70" v-model="data.fio" placeholder="Фамилия Имя Отчество">
@@ -23,6 +26,12 @@
     <div id="phone" class="form">
         <label class="form-label">Номер телефона</label>
         <input type="text" id="phone" class="form-control" maxlength="12" v-model="data.phone">
+    </div>
+    <div id="fio" class="form">
+        <label class="form-label">Должность</label>
+        <select class="form-select" aria-label="Default select example" v-model="data.post_name">
+            <option v-for="(post, id) in allPost" :key="id" :value="post.post_name">{{ post.post_name }}</option>
+        </select>
     </div>
     <template v-if="data.status === 'Не работает'">
         <div id="status" class="form">
@@ -78,17 +87,23 @@ export default {
             data: [],
             proofDismiss: false,
             reason: '',
-            fio: ''
+            fio: '',
+            allPost: []
         };
     },
     mounted() {
         this.WorkerList();
+        this.PostList();
     },
     methods: {
         async WorkerList() {
             const response = await Api().get('showWorker');
             this.data = response.data[this.$route.params.id];
             this.fio = this.data.fio;
+        },
+        async PostList() {
+            const response = await Api().get('showPost');
+            this.allPost = response.data;
         },
         async updateWorker() {
             const response = await Api().post('updateWorker', {
