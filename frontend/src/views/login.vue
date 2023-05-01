@@ -3,7 +3,7 @@
         <h3>Отдел кадров</h3>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Имя пользователя</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" v-model="name">
+            <input type="email" class="form-control" id="exampleFormControlInput1" v-model="name">
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Пароль</label>
@@ -31,7 +31,7 @@ export default {
                 localStorage.setItem('password',JSON.stringify(this.isAuthorized));
                 this.$emit('password-entered', this.password);
                 this.$router.push('/');
-                console.log(this.password)
+                console.log(this.pass)
             } else {
                 alert('Неправильный пароль')
             } 

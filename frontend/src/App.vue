@@ -11,7 +11,7 @@
           <RouterLink to="/vacation" class="nav-link">Отпускные</RouterLink>
         </div>
       </div>
-      <a @click="logout" class="nav-link" id="ref" style="margin-right: 10px;">Выйти</a>
+      <a @click="logout" class="nav-link" id="ref" style="margin-right: 10px;" v-if="StoredUser">Выйти</a>
       <RouterLink to="/reference" class="nav-link" id="ref">Справка</RouterLink>
     </div>
   </nav>
@@ -26,15 +26,22 @@
 export default {
   name: 'App',
   data() {
-      return {
-        
-      }
+    return {
+      StoredUser: false
+    }
+  },
+  created() {
+    this.StoredUser = localStorage.getItem('password');
+    if (this.StoredUser) {
+      this.StoredUser = true
+    }
   },
   methods: {
     logout() {
       localStorage.removeItem('password');
       this.$router.push("/login");
-    },
+      this.StoredUser = false;
+    }
   }
 }
 </script>
@@ -94,5 +101,6 @@ export default {
 
   a#ref:hover {
     color: #bad4fc;
+    cursor: pointer;
   }
 </style>
