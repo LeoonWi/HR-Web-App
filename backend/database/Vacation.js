@@ -25,3 +25,13 @@ export const updateVacation = (req, res) => {
         };
     });
 };
+
+export const searchVacation = (req, res) => {
+    db.query({dateStrings: true, sql: `SELECT * FROM db_hr.Vacation WHERE worker_fio LIKE '%${req.body.str}%'`}, (err, vacations) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json(vacations);
+        };
+    });
+};

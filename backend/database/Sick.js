@@ -24,3 +24,13 @@ export const updateSick = (req, res) => {
         };
     });
 };
+
+export const searchSick = (req, res) => {
+    db.query({dateStrings: true, sql: `SELECT * FROM db_hr.Sick WHERE worker_fio LIKE '%${req.body.str}%'`}, (err, sicks) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json(sicks);
+        };
+    });
+};

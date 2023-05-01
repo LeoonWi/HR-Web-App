@@ -1,5 +1,9 @@
 <template>
-    <button @click="createSick" type="button" class="btn btn-success" id="createSick">Добавить</button>
+    <button @click="createSick" type="button" class="btn btn-outline-success" id="createSick">Добавить</button>
+    <div class="search-input">
+        <input v-on:keyup.enter="search" class="form-control search" type="text" aria-label="search" placeholder="Введите поисковой запрос" v-model="searchStr">
+        <button @click="search" type="button" class="btn btn-light button-edit search"><img src="../assets/search.svg" alt="search-alt" width="20" /></button>
+    </div>
     <table class="table">
         <thead>
             <th scope="col">#</th>
@@ -40,7 +44,8 @@ export default {
     data() {
         return {
             data: [],
-            worker: []
+            worker: [],
+            searchStr: ''
         }
     },
     mounted() {
@@ -80,6 +85,12 @@ export default {
         },
         editSick(sick) {
             sick.isEdit = true;
+        },
+        async search() {
+            const response = await api().post('searchSick', {
+                str: this.searchStr
+            });
+            this.data = response.data;
         }
     }
 };

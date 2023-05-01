@@ -30,3 +30,13 @@ export const createContract = (req, res) => {
         };
     });
 };
+
+export const searchCont = (req, res) => {
+    db.query({dateStrings: true, sql: `SELECT * FROM db_hr.Contract WHERE worker_fio LIKE '%${req.body.str}%'`}, (err, data) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json(data);
+        };
+    });
+};

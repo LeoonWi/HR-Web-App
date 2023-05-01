@@ -49,29 +49,37 @@ export default {
     },
     methods: {
         async saveWorker() {
-            const responseOne = await Api().post('createWorker', {
+            if(FioValidation(this.data.fio) && dateValidation(this.data.birthdate) && phoneValidation(this.data.phone) && addressValidation(this.data.address)) {
+                const responseOne = await Api().post('createWorker', {
                 fio: this.data.fio,
                 birthdate: this.data.birthdate,
                 gender: this.data.gender,
                 address: this.data.address,
                 phone: this.data.phone
-            });
+                });
 
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            var yyyy = today.getFullYear();
-            today = yyyy + '-' + mm + '-' + dd;
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+                today = yyyy + '-' + mm + '-' + dd;
 
-            const responseTwo = await Api().post('createContract', {
-                fio: this.data.fio,
-                date: today
-            })
-            console.log(responseOne.data.message + '\n' + responseTwo.data.message);
-            router.push({ name: 'Worker'});
+                const responseTwo = await Api().post('createContract', {
+                    fio: this.data.fio,
+                    date: today
+                })
+                console.log(responseOne.data.message + '\n' + responseTwo.data.message);
+                router.push({ name: 'Worker'});
+            } else {
+                console.log("Неверный формат.")
+            }
         }
     }
-}
+};
+const FioValidation = (fio) => /^[а-яА-Я]+\s+[а-яА-Я]+\s+[а-яА-Я]+$/.test(fio);
+const dateValidation = (date) => /^\d{4}-\d{2}-\d{2}$/.test(date);
+const phoneValidation = (phone) => /^\+\d{11}$/.test(phone);
+const addressValidation = (address) => /^г\.\s[а-яА-Я]+,\s[а-яА-Я]+\.\s[а-яА-Я]+,\s\W\.\s[0-9]+/.test(address);
 </script>
 
 <style scoped>

@@ -11,6 +11,8 @@
           <RouterLink to="/vacation" class="nav-link">Отпускные</RouterLink>
         </div>
       </div>
+      <a @click="logout" class="nav-link" id="ref" style="margin-right: 10px;">Выйти</a>
+      <RouterLink to="/reference" class="nav-link" id="ref">Справка</RouterLink>
     </div>
   </nav>
 
@@ -20,14 +22,19 @@
 </template>
 
 <script>
-//import { RouterView } from 'vue-router';
-
-
 
 export default {
   name: 'App',
-  components: {
-    
+  data() {
+      return {
+        
+      }
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('password');
+      this.$router.push("/login");
+    },
   }
 }
 </script>
@@ -44,6 +51,23 @@ export default {
     padding-top: 65px;
   }
 
+  div.search-input {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 250px;
+  }
+
+  input.search {
+    display: inline-block;
+    width: 500px;
+    vertical-align: top;
+  }
+
+  button.search {
+    vertical-align: top;
+    margin-left: 5px;
+  }
+
   div.form {
     margin: 10px auto;
   }
@@ -58,5 +82,17 @@ export default {
 
   thead, tr th, td.date {
     text-align: center;
+  }
+
+  div.navbar-nav {
+    width: 100%;
+  }
+
+  a#ref {
+    color: #92befe;
+  }
+
+  a#ref:hover {
+    color: #bad4fc;
   }
 </style>

@@ -55,3 +55,13 @@ export const createWorker = (req, res) => {
         };
     });
 };
+
+export const searchWorker = (req, res) => {
+    db.query({dateStrings: true, sql: `SELECT * FROM db_hr.Worker WHERE fio LIKE '%${req.body.str}%'`}, (err, data) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json(data);
+        };
+    });
+};

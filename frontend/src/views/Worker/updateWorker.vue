@@ -106,16 +106,20 @@ export default {
             this.allPost = response.data;
         },
         async updateWorker() {
-            const response = await Api().post('updateWorker', {
-                fio: this.data.fio,
-                birthdate: this.data.birthdate,
-                gender: this.data.gender,
-                address: this.data.address,
-                phone: this.data.phone,
-                fioKey: this.fio
-            });
-            console.log(response.data.message);
-            window.location.reload();
+            if(FioValidation(this.data.fio) && dateValidation(this.data.birthdate) && phoneValidation(this.data.phone) && addressValidation(this.data.address)) {
+                const response = await Api().post('updateWorker', {
+                    fio: this.data.fio,
+                    birthdate: this.data.birthdate,
+                    gender: this.data.gender,
+                    address: this.data.address,
+                    phone: this.data.phone,
+                    fioKey: this.fio
+                });
+                console.log(response.data.message);
+                window.location.reload();
+            } else {
+                console.log("Неверный формат.")
+            }
         },
         async dismissWorker() {
             const response = await Api().post('updateWorker', {
@@ -139,7 +143,11 @@ export default {
             window.location.reload();
         }
     }
-}
+};
+const FioValidation = (fio) => /^[а-яА-Я]+\s+[а-яА-Я]+\s+[а-яА-Я]+$/.test(fio);
+const dateValidation = (date) => /^\d{4}-\d{2}-\d{2}$/.test(date);
+const phoneValidation = (phone) => /^\+\d{11}$/.test(phone);
+const addressValidation = (address) => /^г\.\s[а-яА-Я]+,\s[а-яА-Я]+\.\s[а-яА-Я]+,\s\W\.\s[0-9]+/.test(address);
 </script>
 
 <style scoped>

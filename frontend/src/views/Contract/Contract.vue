@@ -1,4 +1,8 @@
 <template>
+    <div class="search-input">
+        <input v-on:keyup.enter="search" class="form-control search" type="text" aria-label="search" placeholder="Введите поисковой запрос" v-model="searchStr">
+        <button @click="search" type="button" class="btn btn-light button-edit search"><img src="../../assets/search.svg" alt="search-alt" width="20" /></button>
+    </div>
     <div class="form-check form-switch flag">
       <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked v-model="flagWork">
       <label class="form-check-label" for="flexSwitchCheckChecked">Показать текущие контракты</label>
@@ -44,7 +48,8 @@ export default {
     data() {
         return {
             data: [],
-            flagWork: true
+            flagWork: true,
+            searchStr: ''
         }
     },
     mounted() {
@@ -54,8 +59,20 @@ export default {
         async showContract() {
             const response = await Api().get('showContract');
             this.data = response.data;
+        },
+        async search() {
+            const response = await Api().post('searchContract', {
+                str: this.searchStr
+            });
+            this.data = response.data;
         }
     }
 }
 
 </script>
+
+<style scoped>
+div.search-input {
+    margin-left: 400px;
+}
+</style>
