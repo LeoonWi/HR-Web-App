@@ -12,10 +12,11 @@ export const showWorker = (req, res) => {
     });
 };
 
+
 export const updateWorker = (req, res) => {
     if (!req.body.status) {
-        db.query("UPDATE Worker SET fio = ?, birthdate = ?, gender = ?, address = ?, phone = ? WHERE fio = ?",
-        [req.body.fio, req.body.birthdate, req.body.gender, req.body.address, req.body.phone, req.body.fioKey], (err, data) => {
+        db.query("UPDATE Worker SET fio = ?, birthdate = ?, gender = ?, address = ?, phone = ?, post_name = ? WHERE fio = ?",
+        [req.body.fio, req.body.birthdate, req.body.gender, req.body.address, req.body.phone, req.body.post_name, req.body.fioKey], (err, data) => {
             if (err) {
                 console.log(err);
             } else {

@@ -113,6 +113,7 @@ export default {
                     gender: this.data.gender,
                     address: this.data.address,
                     phone: this.data.phone,
+                    post_name: this.data.post_name,
                     fioKey: this.fio
                 });
                 console.log(response.data.message);
